@@ -125,6 +125,7 @@ void ViewArray()
 	cout << "\n";
 }
 
+
 void CheckSum()
 {
 	int cs;
