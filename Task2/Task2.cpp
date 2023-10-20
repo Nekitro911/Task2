@@ -9,7 +9,7 @@ using std::cin;
 using std::endl;
 
 const int max = 500;
-int N = 0;
+int N = 100;
 int array[max];
 int compare = 0;
 int fw = 0;
@@ -25,26 +25,26 @@ void QuickSort(int* array, int first, int last);
 void ChangeArraySize(void);
 int main()
 {
+	setlocale(LC_ALL, "Russian");
+
 	system("mode con cols=70 lines=60");
 	system("color 0");
-	cout << "\n";
-	cout << " Vvedite nomer massiva: ";
-	cin >> N;
+	
 	char c;
 	while (1)
 	{
 		system("cls");
 		cout << "\n";
-		cout << " Razmer massiva - " << N << "\n\n";
-		cout << " 1) Create vozrastayshego massiva\n";
-		cout << " 2) Create ubivayshego massvia\n";
-		cout << " 3) Create random massive\n";
-		cout << " 4) Prosmotr massiva\n";
-		cout << " 5) Otsortirovat massiv metodom Shella\n";
-		cout << " 6) Otsortirovat massiv metodom Hoara\n";
-		cout << " 7) Izmenit razmer massiva\n";
+		cout << " Размер массива - " << N << ".\n\n";
+		cout << " 1) Создать возрастающий массив\n";
+		cout << " 2) Создать убывающий массив\n";
+		cout << " 3) Создать рандомный массив\n";
+		cout << " 4) Просмотр массива\n";
+		cout << " 5) Сортировка методом прямого выбора\n";
+		cout << " 6) Сортировка пузырьковым методом\n";
+		cout << " 7) Сортировка шейкерным методом\n";
 		cout << "\n";
-		cout << " Esc - Exit\n";
+		cout << " Esc - Выход\n";
 		c = _getch();
 		switch (c)
 		{
@@ -58,24 +58,24 @@ int main()
 			system("cls");
 			compare = 0;
 			fw = 0;
-			cout << "Do sortirovki:\n";
+			cout << "До сортировки:\n";
 			CheckSum();
 			Series();
 			cout << "\n";
 			QuickSort(array, 0, N - 1);
 			ViewArray();
-			cout << "Posle sortirovki:\n";
+			cout << "После сортировки:\n";
 			CheckSum();
 			Series();
 			cout << "\n";
-			cout << "Kolichestvo peresilok: " << fw << ", kolichestvo sravnenii: " << compare << endl;
+			cout << "Количество пересилок: " << fw << ", количество сравнений: " << compare << endl;
 			system("pause");
 			fw = 0;
 			compare = 0;
 			break;
 		case '7':system("cls"); ChangeArraySize(); system("pause"); break;
 		case 27:return 0;
-		default:cout << "\nError! Nevernii vvod. Najmite lybuy klavishu."; _getch();
+		default:cout << "\nошибка! Неверный ввод. Нажмите любую клавишу."; _getch();
 		}
 	}
 }
@@ -85,7 +85,7 @@ void IncArray()
 	{
 		array[i] = i + 1;
 	}
-	cout << "Vozrastayshii massiv create!\n\n";
+	cout << "Возрастающий массив создан!\n\n";
 	ViewArray();
 	CheckSum();
 	Series();
@@ -97,7 +97,7 @@ void DecArray()
 	{
 		array[i] = N - i;
 	}
-	cout << "Ubivayshii massiv create!\n\n";
+	cout << "Убывающий массив создан!\n\n";
 	ViewArray();
 	CheckSum();
 	Series();
@@ -109,7 +109,7 @@ void RandArray()
 	{
 		array[i] = 1 + rand() % N;
 	}
-	cout << "Random massiv create!\n\n";
+	cout << "Рандомный массив создан!\n\n";
 	ViewArray();
 	CheckSum();
 	Series();
@@ -134,7 +134,7 @@ void CheckSum()
 	{
 		cs = cs + array[i];
 	}
-	cout << "Kontrolnaia summa: " << cs << "\n";
+	cout << "Контрольная сумма: " << cs << "\n";
 }
 
 void Series()
@@ -148,7 +148,7 @@ void Series()
 		else
 			s = s + 1;
 	}
-	cout << "Kolichestvo serii: " << s << "\n";
+	cout << "Количество серий: " << s << "\n";
 }
 
 void ShellSort()
@@ -156,7 +156,7 @@ void ShellSort()
 	int gap, i, j, temp;
 	compare = 0;
 	fw = 0;
-	cout << "Do sortirovki:\n";
+	cout << "До сортировки:\n";
 	CheckSum();
 	Series();
 	cout << "\n";
@@ -175,11 +175,11 @@ void ShellSort()
 			}
 	}
 	ViewArray();
-	cout << "Posle sortirovki:\n";
+	cout << "После сортировки:\n";
 	CheckSum();
 	Series();
 	cout << "\n";
-	cout << "Kolichestvo peresilok: " << fw << ", kolichestvo sravnenii: " << compare << endl;
+	cout << "Количество пересилок: " << fw << ", количество сравнений: " << compare << endl;
 }
 void QuickSort(int* array, int first, int last) {
 	int i = first, j = last, temp, x = array[(first + last) / 2];
@@ -216,9 +216,9 @@ void ChangeArraySize()
 {
 	system("cls");
 	cout << "\n";
-	cout << " Vvedite razmer massiva: ";
+	cout << " Введите размер массива: ";
 	cin >> N;
-	cout << " Razmer massiva izmenen N = " << N << endl;
+	cout << " Размер массива изменен N = " << N << endl;
 	cout << "\n";
 }
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
