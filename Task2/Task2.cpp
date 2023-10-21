@@ -40,9 +40,9 @@ int main()
 		cout << " 2) Создать убывающий массив\n";
 		cout << " 3) Создать рандомный массив\n";
 		cout << " 4) Просмотр массива\n";
-		cout << " 5) Сортировка методом прямого выбора\n";
-		cout << " 6) Сортировка пузырьковым методом\n";
-		cout << " 7) Сортировка шейкерным методом\n";
+		cout << " 5) Сортировка методом Шелла\n";
+		cout << " 6) Сортировка методом Хоара\n";
+		cout << " 7) Изменить размер массива\n";
 		cout << "\n";
 		cout << " Esc - Выход\n";
 		c = _getch();
@@ -68,14 +68,14 @@ int main()
 			CheckSum();
 			Series();
 			cout << "\n";
-			cout << "Количество пересилок: " << fw << ", количество сравнений: " << compare << endl;
+			cout << "Количество пересылок: " << fw << ", количество сравнений: " << compare << endl;
 			system("pause");
 			fw = 0;
 			compare = 0;
 			break;
 		case '7':system("cls"); ChangeArraySize(); system("pause"); break;
 		case 27:return 0;
-		default:cout << "\nошибка! Неверный ввод. Нажмите любую клавишу."; _getch();
+		default:cout << "\nОшибка! Неверный ввод. Нажмите любую клавишу."; _getch();
 		}
 	}
 }
@@ -179,7 +179,7 @@ void ShellSort()
 	CheckSum();
 	Series();
 	cout << "\n";
-	cout << "Количество пересилок: " << fw << ", количество сравнений: " << compare << endl;
+	cout << "Количество пересылок: " << fw << ", количество сравнений: " << compare << endl;
 }
 void QuickSort(int* array, int first, int last) {
 	int i = first, j = last, temp, x = array[(first + last) / 2];
