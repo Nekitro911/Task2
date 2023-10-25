@@ -14,13 +14,18 @@ int array[max];
 int compare = 0;
 int fw = 0;
 
+//void heapSort(void);
+
 void IncArray(void);
 void DecArray(void);
 void RandArray(void);
 void ViewArray(void);
 void CheckSum(void);
 void Series(void);
+void BubbleSort(void);
 void ShellSort(void);
+void ShakeSort(void);
+void SelectSort(void);
 void QuickSort(int* array, int first, int last);
 void ChangeArraySize(void);
 int main()
@@ -42,7 +47,10 @@ int main()
 		cout << " 4) Просмотр массива\n";
 		cout << " 5) Сортировка методом Шелла\n";
 		cout << " 6) Сортировка методом Хоара\n";
-		cout << " 7) Изменить размер массива\n";
+		cout << " 7) Сортировка шейкерным методом\n";
+		cout << " 8) Сортировка методом прямого выбора\n";
+		cout << " 9) Сортировка пузырьковым методом\n";
+		cout << " 0) Изменить размер массива\n";
 		cout << "\n";
 		cout << " Esc - Выход\n";
 		c = _getch();
@@ -73,11 +81,68 @@ int main()
 			fw = 0;
 			compare = 0;
 			break;
-		case '7':system("cls"); ChangeArraySize(); system("pause"); break;
+		//case '0':system("cls"); ChangeArraySize(); system("pause"); break;
+		//case '0':system("cls"); heapSort(); system("pause"); break;
+		case '8':system("cls"); SelectSort(); system("pause"); break;
+		case '9':system("cls"); BubbleSort(); system("pause"); break;
+		case '7':system("cls"); ShakeSort(); system("pause"); break;
 		case 27:return 0;
 		default:cout << "\nОшибка! Неверный ввод. Нажмите любую клавишу."; _getch();
 		}
 	}
+}
+void ShakeSort()
+{
+	int l, r, temp;
+	int fw, compare;
+	cout << "До сортировки:\n";
+	CheckSum();
+	Series();
+	cout << "\n";
+	l = 0;
+	r = N - 1;
+	fw = 0;
+	compare = 0;
+	int flag = 1;
+	while ((l < r) && flag > 0)
+	{
+		flag = 0;
+		for (int i = l; i < r; i++)
+		{
+			compare = compare + 1;
+			if (array[i] > array[i + 1])
+			{
+				temp = array[i];
+				fw = fw + 1;
+				array[i] = array[i + 1];
+				fw = fw + 1;
+				array[i + 1] = temp;
+				fw = fw + 1;
+				flag = 1;
+			}
+		}
+		r--;
+		for (int i = r; i > l; i--)
+		{
+			if (array[i - 1] > array[i])
+			{
+				temp = array[i];
+				fw = fw + 1;
+				array[i] = array[i - 1];
+				fw = fw + 1;
+				array[i - 1] = temp;
+				fw = fw + 1;
+				flag = 1;
+			}
+		}
+		l++;
+	}
+	ViewArray();
+	cout << "После сортировки:\n";
+	CheckSum();
+	Series();
+	cout << "\n";
+	cout << "Количество сравнений: " << compare << ", количество пересылок: " << fw << endl;
 }
 void IncArray()
 {
@@ -150,6 +215,195 @@ void Series()
 	}
 	cout << "Количество серий: " << s << "\n";
 }
+void SelectSort()
+{
+	int min, temp, j;
+	int fw, compare;
+	cout << "До сортировки:\n";
+	CheckSum();
+	Series();
+	cout << "\n";
+	compare = 0;
+	fw = 0;
+	for (int i = 0; i < N - 1; i++)
+	{
+		min = i;
+		for (j = i + 1; j < N; j++)
+		{
+			if (array[j] < array[min])
+			{
+				min = j;
+				compare = compare + 1;
+			}
+			else
+				compare = compare + 1;
+		}
+		temp = array[i];
+		fw = fw + 1;
+		array[i] = array[min];
+		fw = fw + 1;
+		array[min] = temp;
+		fw = fw + 1;
+	}
+	ViewArray();
+	cout << "После сортировки:\n";
+	CheckSum();
+	Series();
+	cout << "\n";
+	cout << "Количество сравнений: " << compare << ", количество пересылок: " << fw << endl;
+}
+void BubbleSort()
+{
+	int i, j, temp;
+	int fw, compare;
+	cout << "До сортировки:\n";
+	CheckSum();
+	Series();
+	cout << "\n";
+	compare = 0;
+	fw = 0;
+	for (i = 0; i < N; i++)
+	{
+		for (j = N - 1; j > i; j--)
+		{
+			compare = compare + 1;
+			if (array[j - 1] > array[j])
+			{
+				temp = array[j - 1];
+				fw = fw + 1;
+				array[j - 1] = array[j];
+				fw = fw + 1;
+				array[j] = temp;
+				fw = fw + 1;
+			}
+		}
+	}
+	ViewArray();
+	cout << "После сортировки:\n";
+	CheckSum();
+	Series();
+	cout << "\n";
+	cout << "Количество сравнений: " << compare << ", количество пересылок: " << fw << endl;
+}
+//static int add2pyramid(int* array, int first, int last)
+//{
+//	int i;
+//	int first;
+//	int last;
+//	if ((2 * i + 2) < N)
+//	{
+//		if (array[2 * i + 1] < array[2 * i + 2]) first = 2 * i + 2;
+//		else first = 2 * i + 1;
+//	}
+//	else first = 2 * i + 1;
+//	if (first >= N) return i;
+//	if (array[i] < array[first])
+//	{
+//		last = array[i];
+//		array[i] = array[first];
+//		array[first] = last;
+//		if (first < N / 2) i = first;
+//	}
+//	return i;
+//}
+//void PyramidSort(int* array, int first, int last)
+//{
+//	int i;
+//	//step 1: building the pyramid
+//	for (int i = len / 2 - 1; i >= 0; --i)
+//	{
+//		long prev_i = i;
+//		i = add2pyramid(array, i, len);
+//		if (prev_i != i) ++i;
+//	}
+//
+//	//step 2: sorting
+//	int last;
+//	for (int k = len - 1; k > 0; --k)
+//	{
+//		last = array[0];
+//		array[0] = array[k];
+//		array[k] = buf;
+//		int i = 0, prev_i = -1;
+//		while (i != prev_i)
+//		{
+//			prev_i = i;
+//			i = add2pyramid(array, i, k);
+//		}
+//	}
+//}
+//void PyramidSort(int* array, int first, int last) {
+//	int i = first, j = last, temp, x = array[(first + last) / 2];
+//	do
+//	{
+//		compare++;
+//		while (array[i] < x)
+//			i++;
+//		while (array[j] > x)
+//			j--;
+//		if (i <= j)
+//		{
+//			compare++;
+//			if (i < j)
+//				compare++;
+//			{
+//				temp = array[i];
+//				fw++;
+//				array[i] = array[j];
+//				fw++;
+//				array[j] = temp;
+//				fw++;
+//			}
+//			i++;
+//			j--;
+//		}
+//	} while (i <= j);
+//	if (i < last)
+//		QuickSort(array, i, last);
+//	if (first < j)
+//		QuickSort(array, first, j);
+//}
+//void siftDown(int* array, int first, int last)
+//{
+//	int maxChild;
+//	int done = 0;
+//
+//	while ((first * 2 <= last) && (!done))
+//	{
+//		if (first * 2 == last)
+//			maxChild = first * 2;
+//
+//		else if (array[first * 2] > array[first * 2 + 1])
+//			maxChild = first * 2;
+//		else
+//			maxChild = first * 2 + 1;
+//
+//		if (array[first] < array[maxChild])
+//		{
+//			int temp = array[first];
+//			array[first] = array[maxChild];
+//			array[maxChild] = temp;
+//			first = maxChild;
+//		}
+//		else
+//			done = 1;
+//	}
+//}
+//
+//void heapSort(int* array, int array_size)
+//{
+//
+//	for (int i = (array_size / 2); i >= 0; i--)
+//		siftDown(array, i, array_size - 1);
+//
+//	for (int i = array_size - 1; i >= 1; i--)
+//	{
+//		int temp = array[0];
+//		array[0] = array[i];
+//		array[i] = temp;
+//		siftDown(array, 0, i - 1);
+//	}
+//}
 
 void ShellSort()
 {
