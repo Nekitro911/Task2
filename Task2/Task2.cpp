@@ -50,7 +50,7 @@ int main()
 		cout << " 7) Сортировка шейкерным методом\n";
 		cout << " 8) Сортировка методом прямого выбора\n";
 		cout << " 9) Сортировка пузырьковым методом\n";
-		cout << " 0) Изменить размер массива\n";
+		cout << " Пробел - Изменить размер массива\n";
 		cout << "\n";
 		cout << " Esc - Выход\n";
 		c = _getch();
@@ -81,8 +81,7 @@ int main()
 			fw = 0;
 			compare = 0;
 			break;
-		//case '0':system("cls"); ChangeArraySize(); system("pause"); break;
-		//case '0':system("cls"); heapSort(); system("pause"); break;
+		case 32:system("cls"); ChangeArraySize(); system("pause"); break;	
 		case '8':system("cls"); SelectSort(); system("pause"); break;
 		case '9':system("cls"); BubbleSort(); system("pause"); break;
 		case '7':system("cls"); ShakeSort(); system("pause"); break;
@@ -179,7 +178,6 @@ void RandArray()
 	CheckSum();
 	Series();
 }
-
 void ViewArray()
 {
 	for (int i = 0; i != N; i = i + 10)
@@ -189,8 +187,6 @@ void ViewArray()
 	}
 	cout << "\n";
 }
-
-
 void CheckSum()
 {
 	int cs;
@@ -201,7 +197,6 @@ void CheckSum()
 	}
 	cout << "Контрольная сумма: " << cs << "\n";
 }
-
 void Series()
 {
 	int s;
@@ -228,7 +223,7 @@ void SelectSort()
 	for (int i = 0; i < N - 1; i++)
 	{
 		min = i;
-		for (j = i + 1; j < N; j++)
+		for (j = i + 1; j < N; j++)  
 		{
 			if (array[j] < array[min])
 			{
@@ -285,126 +280,33 @@ void BubbleSort()
 	cout << "\n";
 	cout << "Количество сравнений: " << compare << ", количество пересылок: " << fw << endl;
 }
-//static int add2pyramid(int* array, int first, int last)
+//static int heapify(int* array, int first, int last)
 //{
-//	int i;
-//	int first;
-//	int last;
-//	if ((2 * i + 2) < N)
-//	{
-//		if (array[2 * i + 1] < array[2 * i + 2]) first = 2 * i + 2;
-//		else first = 2 * i + 1;
-//	}
-//	else first = 2 * i + 1;
-//	if (first >= N) return i;
-//	if (array[i] < array[first])
-//	{
-//		last = array[i];
-//		array[i] = array[first];
-//		array[first] = last;
-//		if (first < N / 2) i = first;
-//	}
-//	return i;
+//int largest = i;
+//int first;
+//int last;
+//
+//if (first < N && array[first] > array[largest])
+//largest = first;
+//
+//if (last < N && array[last] > array[largest])
+//largest = last;
+//
+//if (largest != i) {
+//	swap(array[i], array[largest]);
+//	heapify(array, N, largest);
 //}
-//void PyramidSort(int* array, int first, int last)
+//}
+//void heapSort(int* array, int first, int last)
 //{
-//	int i;
-//	//step 1: building the pyramid
-//	for (int i = len / 2 - 1; i >= 0; --i)
-//	{
-//		long prev_i = i;
-//		i = add2pyramid(array, i, len);
-//		if (prev_i != i) ++i;
-//	}
+//	 for (int i = N / 2 - 1; i >= 0; i--)
+//heapify(array, N, i);
 //
-//	//step 2: sorting
-//	int last;
-//	for (int k = len - 1; k > 0; --k)
-//	{
-//		last = array[0];
-//		array[0] = array[k];
-//		array[k] = buf;
-//		int i = 0, prev_i = -1;
-//		while (i != prev_i)
-//		{
-//			prev_i = i;
-//			i = add2pyramid(array, i, k);
-//		}
-//	}
+//for (int i = N - 1; i > 0; i--) {
+//	swap(array[0], array[i]);
+//	heapify(array, i, 0);
 //}
-//void PyramidSort(int* array, int first, int last) {
-//	int i = first, j = last, temp, x = array[(first + last) / 2];
-//	do
-//	{
-//		compare++;
-//		while (array[i] < x)
-//			i++;
-//		while (array[j] > x)
-//			j--;
-//		if (i <= j)
-//		{
-//			compare++;
-//			if (i < j)
-//				compare++;
-//			{
-//				temp = array[i];
-//				fw++;
-//				array[i] = array[j];
-//				fw++;
-//				array[j] = temp;
-//				fw++;
-//			}
-//			i++;
-//			j--;
-//		}
-//	} while (i <= j);
-//	if (i < last)
-//		QuickSort(array, i, last);
-//	if (first < j)
-//		QuickSort(array, first, j);
-//}
-//void siftDown(int* array, int first, int last)
-//{
-//	int maxChild;
-//	int done = 0;
-//
-//	while ((first * 2 <= last) && (!done))
-//	{
-//		if (first * 2 == last)
-//			maxChild = first * 2;
-//
-//		else if (array[first * 2] > array[first * 2 + 1])
-//			maxChild = first * 2;
-//		else
-//			maxChild = first * 2 + 1;
-//
-//		if (array[first] < array[maxChild])
-//		{
-//			int temp = array[first];
-//			array[first] = array[maxChild];
-//			array[maxChild] = temp;
-//			first = maxChild;
-//		}
-//		else
-//			done = 1;
 //	}
-//}
-//
-//void heapSort(int* array, int array_size)
-//{
-//
-//	for (int i = (array_size / 2); i >= 0; i--)
-//		siftDown(array, i, array_size - 1);
-//
-//	for (int i = array_size - 1; i >= 1; i--)
-//	{
-//		int temp = array[0];
-//		array[0] = array[i];
-//		array[i] = temp;
-//		siftDown(array, 0, i - 1);
-//	}
-//}
-
 void ShellSort()
 {
 	int gap, i, j, temp;
